@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  # Trigger the workflow on push or pull request,
+  # but only for the master branch
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Run a multi-line script
+      run: |
+        echo "package com.gdgistanbul.api \
+
+
+        object Secrets { \
+        
+          const val MEETUP_KEY = \"\" \
+          
+          const val MEETUP_SECRET = \"\" \
+          
+          const val MEETUP_REDIRECT_URL = \"\" \
+          
+        }" >> meetupapi/src/main/java/com/gdgistanbul/api/Secrets.kt
+#     - name: print Secrets.kt
+#       run: tail meetupapi/src/main/java/com/gdgistanbul/api/Secrets.kt
+    - name: setup-android
+      uses: msfjarvis/setup-android@0.2
+
